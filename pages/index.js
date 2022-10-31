@@ -1,24 +1,41 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { io } from 'socket.io-client'
-import {useState, useLayoutEffect} from 'react'
-import useDate from '../hooks/useDate'
+import {useState, useLayoutEffect, useEffect} from 'react'
 import moment from 'moment'
-const socket = io('http://localhost:5001')
+import Table from '../src/components/table'
+import Tag from '../src/components/Tag'
 
 export default function Home() {
   const [servers, setServers] = useState([])
+  const [offlineServers, setOfflineServers] = useState(0)
 
+  useEffect(() => {
+    const socket = io('http://localhost:5001')
 
-  useLayoutEffect(() => {
     socket.on('update-status', (servers) => {
+      let count = 0
+      servers.sort((a, b) =>{
+        if(!a.online){
+          return -1
+        }
+
+        if(!b.online){
+          return 1
+        } 
+
+        return 0
+      })
+      servers.forEach((el) => {
+        if (!el.online) count++
+      });
+      setOfflineServers(count)
       setServers(servers);
     });
 
-
     return () => {
       socket.off('update-status');
+      socket.disconnect();
     };
   }, [])
   
@@ -31,13 +48,19 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1>
-          Servers
-        </h1>
+        <h1>Servers🖥</h1>
+        <h3>Offline ({offlineServers}) </h3>
 
         <div className={styles.ServersContainer}>
+
+              
             {servers.map((server, index) =>{
-              return <label key= {index}> {server.label} - {server.ip} - <label style={server.online ? {color:'green'} : {color:'red'}}>{server.online ? 'Online' : 'Offline'}</label> {moment(server.lastUpdate).fromNow()}</label>
+              return <div key= {index} className={styles.ServerList}> 
+                <label style={{width:'25%'}}>{server.label}</label> 
+                <label style={{width:'25%'}}>{server.ip}</label> 
+                <Tag color={server.online ? 'green' :'red'}>{server.online ? 'ONLINE' : 'OFFLINE'}</Tag> 
+                <label style={{width:'25%'}}>{moment(server.lastUpdate).fromNow()}</label>
+              </div>
             })}
         </div>
       </main>
