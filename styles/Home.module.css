@@ -10,6 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .footer {
@@ -106,6 +107,14 @@
 .logo {
   height: 1em;
   margin-left: 0.5rem;
+}
+
+.ServersContainer{
+  border:1px black;
+  width: 100%;
+  max-width: 1920px;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 600px) {
