@@ -3,7 +3,6 @@ import styles from '../styles/Home.module.css'
 import { io } from 'socket.io-client'
 import {useState, useLayoutEffect, useEffect} from 'react'
 import moment from 'moment'
-import Table from '../src/components/table'
 import Tag from '../src/components/Tag'
 
 export default function Home() {
