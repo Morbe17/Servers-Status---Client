@@ -22,7 +22,7 @@ export default function Home() {
     })
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/serverStatus?ip=${server.ip}`, {
+      const response = await fetch(`http://127.0.0.1:5100/serverStatus?ip=${server.ip}`, {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         cors: 'no-cors'
       })
@@ -48,7 +48,7 @@ export default function Home() {
 
   const turnServerOn = async (server, index) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/startServer?mac=${server.mac}`, {
+      const response = await fetch(`http://127.0.0.1:5100/startServer?server=${server}`, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         cors: 'no-cors'
       })
@@ -64,7 +64,7 @@ export default function Home() {
 
   const sendStatusEmail = async (server, index) =>{
     try{
-      const response = await fetch(`http://127.0.0.1:5000/sendEmailSample`, {
+      const response = await fetch(`http://127.0.0.1:5100/sendEmailSample`, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         cors: 'no-cors'
       })
