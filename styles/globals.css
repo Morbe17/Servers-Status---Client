@@ -19,6 +19,55 @@ p, text, h2, h3, h4, h4, h6, span, strong, label{
   font-family: 'Poppins', sans-serif;
 }
 
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 18px;
+    left: 18px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  4.9% {
+    top: 18px;
+    left: 18px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  5% {
+    top: 18px;
+    left: 18px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 36px;
+    height: 36px;
+    opacity: 0;
+  }
+}
+
+
 
 @media (prefers-color-scheme: dark) {
   html {
@@ -27,5 +76,27 @@ p, text, h2, h3, h4, h4, h6, span, strong, label{
   body {
     color: white;
     background: rgba(0, 0, 0, 0.176);
+    
   }
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+/* width */
