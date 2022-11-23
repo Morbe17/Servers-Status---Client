@@ -48,7 +48,7 @@ export default function Home() {
 
   const turnServerOn = async (server, index) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5100/startServer?server=${server}`, {
+      const response = await fetch(`http://127.0.0.1:5100/startServer?mac=${server.mac}&ip=${server.ip}`, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         cors: 'no-cors'
       })
